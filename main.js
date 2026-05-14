@@ -68,39 +68,27 @@ function ceasarCipher(string, key) {
 
     let cipheredStringArr = [];
 
-    stringArray.forEach(element => {
-        const isLetter = /[a-zA-Z]/.test(element);
-        const isUpperCase = /[A-Z]/.test(element);
-        let capitalLetter =
-
-            function getCipheredLetter() {
-                let elementIndex = alphabet.indexOf(element);
-                let cipheredLetter = cipheredArray[elementIndex];
-                if (isUpperCase) {
-                    return capitalize(cipheredLetter)
-                } else {
-                    return cipheredLetter
-
-                }
-            }
-
-        function capitalize(letter) {
-            return letter.toUpperCase();
-        }
-
-        if (isLetter) {
-            if (isUpperCase) {
-                let Letter = capitalize(getCipheredLetter());
-                cipheredStringArr.push(Letter);
-            } else {
-                cipheredStringArr.push(getCipheredLetter());
-            }
+    for(const letter of stringArray){
+        
+        let isUpperCase = /[A-Z]/.test(letter);
+        let isNotAletter = !/[a-zA-Z]/.test(letter);
+        let isUndefined = letter === undefined;
+    
+        if (isNotAletter || isUndefined) {
+            cipheredStringArr.push(letter);
+        } else if (isUpperCase) {
+            let lowerCaseLetter = letter.toLowerCase();
+            let letterIndex = alphabet.indexOf(lowerCaseLetter);
+            let cipheredLetter = cipheredArray[letterIndex];
+            cipheredStringArr.push(cipheredLetter.toUpperCase())   
         } else {
-            cipheredStringArr.push(element);
+            let letterIndex = alphabet.indexOf(letter);
+            let cipheredLetter = cipheredArray[letterIndex];
+            cipheredStringArr.push(cipheredLetter)
         }
-    });
+    }
 
-    return "A";
+    return cipheredStringArr.join("");
 }
 
 export { sum, capitalize, reverseString, calculator, ceasarCipher };
