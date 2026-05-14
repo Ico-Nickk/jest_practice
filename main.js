@@ -91,4 +91,26 @@ function ceasarCipher(string, key) {
     return cipheredStringArr.join("");
 }
 
-export { sum, capitalize, reverseString, calculator, ceasarCipher };
+function analyzeArray(arr){
+    let sumOfArray = arr.reduce((sum, current) => sum + current, 0);
+    let arrayLengh = arr.length;
+
+    function compareNumeric(a, b) {
+        if (a > b) return 1;
+        if (a == b) return 0;
+        if (a < b) return -1;
+    }
+
+    let sortedArray = arr.sort(compareNumeric)
+
+    let obj = {
+        "average": sumOfArray/arrayLengh,
+        "min": sortedArray[0],
+        "max": sortedArray[sortedArray.length-1],
+        "length": arr.length
+    };
+
+    return obj
+}
+
+export { sum, capitalize, reverseString, calculator, ceasarCipher, analyzeArray };
